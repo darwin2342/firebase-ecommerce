@@ -65,6 +65,13 @@ jobs:
           fi
 
       - name: Build with Vercel
+        run: |
+            set -a
+            source .env.production.local
+            set +a
+            vercel build --prod --token=${{ secrets.VERCEL_TOKEN }}          
+
+      - name: Build with Vercel
         run: vercel build --prod --token=${{ secrets.VERCEL_TOKEN }}
 
       - name: Deploy to Vercel
