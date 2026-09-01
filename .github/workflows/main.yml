@@ -55,6 +55,15 @@ jobs:
       - name: Pull production environment variables
         run: vercel env pull .env.production.local --environment=production --token=${{ secrets.VERCEL_TOKEN }}
 
+      - name: Check Firebase env file
+        run: |
+          if grep -q "^VITE_FIREBASE_API_KEY=" .env.production.local; then
+            echo "Firebase API key exists in pulled production env"
+          else
+            echo "Firebase API key is missing"
+            exit 1
+          fi
+
       - name: Build with Vercel
         run: vercel build --prod --token=${{ secrets.VERCEL_TOKEN }}
 
