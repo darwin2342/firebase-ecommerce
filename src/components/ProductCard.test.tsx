@@ -3,8 +3,7 @@ import { MemoryRouter } from "react-router-dom"
 import ProductCard from './ProductCard'
 
 import { useCart } from "../context/CartContext"
-import { useDeleteProduct, useProduct } from '../hooks/useProducts'
-import { TextEncoder, TextDecoder } from 'util';
+import { useDeleteProduct } from '../hooks/useProducts'
 import userEvent from '@testing-library/user-event'
 
 Object.assign(globalThis, {
@@ -36,8 +35,10 @@ test("renders the product information", () => {
         id: "1",
         title: "Nike Shoes",
         price: 99.99,
+        description: "Comfortable running shoes",
         category: "Shoes",
-        image: "nike.jpg"
+        image: "nike.jpg",
+        
     };
 
     render(
@@ -79,13 +80,14 @@ test("calls addtoCart when Add to Cart is clicked", async () => {
         price: 99.99,
         category: "Shoes",
         image: "nike.jpg",
+        description: "Comfortable running shoes",
     };
 
     render(
         <MemoryRouter>
             <ProductCard product={fakeProduct} />
         </MemoryRouter>
-    );
+);
 
     await user.click(
         screen.getByRole("button",

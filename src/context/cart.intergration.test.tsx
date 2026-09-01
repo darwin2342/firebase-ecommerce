@@ -38,6 +38,7 @@ test("updates the cart when a product is added", async () => {
         price: 99.99,
         category: 'Shoes',
         image: 'nike.jpg',
+        description: "Comfortable running shoes",
     };
 
     render(
